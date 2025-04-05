@@ -1,0 +1,3166 @@
+/* Styles pour le Portfolio Arcade Créatif */
+:root {
+  --arcade-dark: #121212;
+  --arcade-darker: #080808;
+  --arcade-light: #f0f0f0;
+  --arcade-accent: #ff00ff;
+  --arcade-accent-glow: rgba(255, 0, 255, 0.5);
+  --arcade-blue: #00ffff;
+  --arcade-blue-glow: rgba(0, 255, 255, 0.5);
+  --arcade-green: #00ff8c;
+  --arcade-green-glow: rgba(0, 255, 140, 0.5);
+  --arcade-yellow: #ffff00;
+  --arcade-yellow-glow: rgba(255, 255, 0, 0.5);
+  --arcade-red: #ff2a6d;
+  --arcade-red-glow: rgba(255, 42, 109, 0.5);
+  --plumbob-green: #54CF45;
+  --panel-bg: rgba(20, 20, 30, 0.85);
+  --primary-font: 'Poppins', sans-serif;
+  --arcade-font: 'Press Start 2P', cursive;
+}
+
+/* Style pour le bouton de toggle du thème */
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 90; /* S'assurer qu'il est au-dessus d'autres éléments mais sous les panneaux */
+  transition: all 0.2s ease;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--arcade-yellow);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px var(--arcade-yellow-glow);
+}
+
+.theme-toggle i {
+  color: var(--arcade-yellow);
+  font-size: 20px;
+  text-shadow: 0 0 10px var(--arcade-yellow-glow);
+}
+
+/* Styles spécifiques pour le thème clair */
+.sims4-theme .theme-toggle {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px solid var(--arcade-blue);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.sims4-theme .theme-toggle i {
+  color: var(--arcade-blue);
+  text-shadow: 0 0 10px var(--arcade-blue-glow);
+}
+
+/* Amélioration de la visibilité */
+.theme-toggle::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+  z-index: -1;
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+}
+
+/* Thème jour inspiré du style Sims 4 pour le Portfolio Arcade */
+
+/* Classe principale du thème jour */
+.sims4-theme {
+  /* Palette de couleurs Sims 4 */
+  --arcade-dark: #EBEAEA; /* Fond gris clair Sims 4 */
+  --arcade-darker: #DDDDDD;
+  --arcade-light: #333333; /* Texte principal */
+  --arcade-accent: #17BA7F; /* Vert principal Sims 4 */
+  --arcade-accent-glow: rgba(23, 186, 127, 0.5);
+  --arcade-blue: #0098DC; /* Bleu Sims 4 */
+  --arcade-blue-glow: rgba(0, 152, 220, 0.5);
+  --arcade-green: #54CF45; /* Vert plumbob Sims 4 */
+  --arcade-green-glow: rgba(84, 207, 69, 0.5);
+  --arcade-yellow: #FFD100; /* Jaune Sims 4 */
+  --arcade-yellow-glow: rgba(255, 209, 0, 0.5);
+  --arcade-red: #FF794D; /* Orange Sims 4 */
+  --arcade-red-glow: rgba(255, 121, 77, 0.5);
+  --plumbob-color: #54CF45; /* Vert plumbob */
+  --panel-bg: rgba(255, 255, 255, 0.95);
+  
+  /* Appliquer le fond clair et le texte foncé */
+  background-color: var(--arcade-dark);
+  color: var(--arcade-light);
+}
+
+/* Modifications de l'écran de chargement */
+.sims4-theme .loading-screen {
+  background: linear-gradient(125deg, #17BA7F, #0098DC);
+}
+
+.sims4-theme .loading-plumbob {
+  background-color: #54CF45;
+  filter: drop-shadow(0 0 15px rgba(84, 207, 69, 0.8));
+}
+
+.sims4-theme .loading-bar {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.sims4-theme .loading-progress {
+  background: linear-gradient(to right, #54CF45, #80E06B);
+  box-shadow: 0 0 10px rgba(84, 207, 69, 0.5);
+}
+
+.sims4-theme .loading-tips {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sims4-theme .loading-subtitle {
+  color: white;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* Modifications du title */
+.sims4-theme .arcade-title {
+  margin-top: 20px;
+  margin-bottom: 100px;
+  color: #333;
+  font-weight: 600;
+  text-shadow: none;
+  animation: sims4-title-pulse 2s infinite;
+}
+
+@media (max-width: 992px) {
+  .sims4-theme .arcade-title {
+    margin-bottom: 60px;
+  }
+}
+
+/* Adaptation pour les petits écrans */
+@media (max-width: 768px) {
+  .sims4-theme .arcade-title {
+    margin-bottom: 50px;
+  }
+}
+
+/* Adaptation pour les très petits écrans */
+@media (max-width: 576px) {
+  .sims4-theme .arcade-title {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    font-size: 22px;
+  }
+}
+
+/* Animation du titre dans le thème Sims 4 */
+@keyframes sims4-title-pulse {
+  0%, 100% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.02);
+  }
+}
+
+.sims4-theme .arcade-title {
+  animation: sims4-title-pulse 2s infinite;
+}
+
+/* Personnage d'info style Sims */
+.sims4-theme .character-info {
+  top: 30px; /* Position légèrement ajustée */
+}
+
+.sims4-theme .plumbob {
+  background-color: #54CF45 !important; /* Forcer la couleur verte classique de Sims */
+  filter: drop-shadow(0 0 5px rgba(84, 207, 69, 0.8));
+}
+
+.sims4-theme .avatar {
+  border: 3px solid #17BA7F;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Navigation */
+.sims4-theme .map-button, 
+.sims4-theme .audio-control,
+.sims4-theme .theme-toggle {
+  background-color: white;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.sims4-theme .map-button i, 
+.sims4-theme .audio-control i,
+.sims4-theme .theme-toggle i {
+  color: #17BA7F;
+  text-shadow: none;
+}
+
+.sims4-theme .map-button:hover, 
+.sims4-theme .audio-control:hover,
+.sims4-theme .theme-toggle:hover {
+  transform: translateY(-3px);
+}
+
+/* Carte overlay */
+.sims4-theme .map-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.sims4-theme .map-container {
+  background-color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border: none;
+}
+
+.sims4-theme .map-container h3 {
+  color: #17BA7F;
+  text-shadow: none;
+  font-family: var(--primary-font);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.sims4-theme .map-image {
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+}
+
+.sims4-theme .hotspot-dot {
+  background-color: #17BA7F;
+  box-shadow: 0 0 10px rgba(23, 186, 127, 0.5);
+}
+
+.sims4-theme .map-hotspot:nth-child(2) .hotspot-dot {
+  background-color: #0098DC;
+  box-shadow: 0 0 10px rgba(0, 152, 220, 0.5);
+}
+
+.sims4-theme .map-hotspot:nth-child(3) .hotspot-dot {
+  background-color: #FFD100;
+  box-shadow: 0 0 10px rgba(255, 209, 0, 0.5);
+}
+
+.sims4-theme .map-hotspot:nth-child(4) .hotspot-dot {
+  background-color: #FF794D;
+  box-shadow: 0 0 10px rgba(255, 121, 77, 0.5);
+}
+
+.sims4-theme .map-hotspot:nth-child(5) .hotspot-dot {
+  background-color: #9F6ADE;
+  box-shadow: 0 0 10px rgba(159, 106, 222, 0.5);
+}
+
+.sims4-theme .map-hotspot span {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-weight: 500;
+}
+
+.sims4-theme .map-close {
+  background: linear-gradient(90deg, #17BA7F, #15A470);
+  border-radius: 20px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.sims4-theme .map-close:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Zone de transition */
+.sims4-theme .transition-effect {
+  background: radial-gradient(circle, transparent 0%, #EBEAEA 100%);
+}
+
+/* Fiches des arcade-machines */
+.sims4-theme .arcade-machine-spot {
+  transition: all 0.3s ease;
+}
+
+.sims4-theme .arcade-machine-spot:hover {
+  transform: translateY(-10px);
+}
+
+.sims4-theme .machine-preview {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.sims4-theme .glow-effect {
+  border-top: 5px solid #17BA7F;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.sims4-theme .arcade-machine-spot:nth-child(2) .glow-effect {
+  border-top-color: #0098DC;
+}
+
+.sims4-theme .arcade-machine-spot:nth-child(3) .glow-effect {
+  border-top-color: #FFD100;
+}
+
+.sims4-theme .arcade-machine-spot:nth-child(4) .glow-effect {
+  border-top-color: #FF794D;
+}
+
+.sims4-theme .arcade-machine-spot:nth-child(5) .glow-effect {
+  border-top-color: #9F6ADE;
+}
+
+.sims4-theme .arcade-machine-spot:hover::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 25px;
+  height: 25px;
+  background-color: #54CF45;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  animation: card-plumbob 0.3s ease-out;
+}
+
+@keyframes card-plumbob {
+  from {
+      transform: translateX(-50%) scale(0);
+  }
+  to {
+      transform: translateX(-50%) scale(1);
+  }
+}
+
+.sims4-theme .machine-label h3 {
+  color: #333;
+  font-weight: 600;
+  text-shadow: none;
+}
+
+.sims4-theme .machine-label p {
+  color: #666;
+}
+
+/* Headers des zones */
+.sims4-theme .zone-header {
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sims4-theme .zone-header h2 {
+  font-family: var(--primary-font);
+  font-size: 20px;
+  color: #17BA7F;
+  text-shadow: none;
+  font-weight: 600;
+}
+
+.sims4-theme .back-btn {
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  color: #333;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.sims4-theme .back-btn:hover {
+  background-color: #e8e8e8;
+  transform: translateX(-5px);
+}
+
+/* Machine à pince */
+.sims4-theme .claw-game-area {
+  background-color: white;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.sims4-theme .model-capsule {
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  animation: float-capsule 3s ease-in-out infinite;
+}
+
+.sims4-theme .model-capsule.grabbed {
+  border-color: #17BA7F;
+  box-shadow: 0 0 20px rgba(23, 186, 127, 0.5);
+}
+
+/* Contrôles de la pince */
+.sims4-theme .controls-instructions-container {
+  gap: 20px;
+}
+
+.sims4-theme .claw-controls {
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.sims4-theme .direction-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 40px);
+  grid-template-rows: repeat(3, 40px);
+  gap: 5px;
+}
+
+.sims4-theme .direction-pad button {
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  color: #333;
+}
+
+.sims4-theme .direction-pad button:hover {
+  background-color: #e8e8e8;
+}
+
+.sims4-theme .grab-button {
+  background: linear-gradient(to bottom, #17BA7F, #15A470);
+  box-shadow: 0 4px 0 #108056;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sims4-theme .grab-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #108056;
+}
+
+.sims4-theme .instructions {
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.sims4-theme .instructions h3 {
+  color: #17BA7F;
+  margin-bottom: 10px;
+}
+
+.sims4-theme .instructions p {
+  color: #666;
+}
+
+.sims4-theme .keyboard-tip {
+  color: #999;
+}
+
+/* Galerie d'art */
+.sims4-theme .dark-gallery {
+  background-color: white;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.sims4-theme .gallery-instruction {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid #e0e0e0;
+}
+
+.sims4-theme .gallery-instruction p {
+  color: #17BA7F;
+}
+
+.sims4-theme .artwork {
+  opacity: 0.1;
+}
+
+.sims4-theme .artwork img {
+  border: 2px solid #17BA7F;
+}
+
+.sims4-theme .artwork-frame {
+  border: 5px solid #eaeaea;
+  background-color: #f5f5f5;
+}
+
+.sims4-theme .flashlight {
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+/* Borne d'arcade */
+.sims4-theme .cabinet-frame {
+  background-color: #f7f7f7;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.sims4-theme .cabinet-frame::before {
+  background-color: #eaeaea;
+}
+
+.sims4-theme .cabinet-frame::after {
+  color: #FFD100;
+  text-shadow: none;
+}
+
+.sims4-theme .cabinet-screen {
+  border: 10px solid #e0e0e0;
+}
+
+.sims4-theme .joystick-base {
+  background-color: #e0e0e0;
+}
+
+.sims4-theme .joystick-stick {
+  background-color: #999;
+}
+
+.sims4-theme .arcade-btn {
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.1), inset 0 5px 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Projecteur */
+.sims4-theme .cinema-screen {
+  background-color: #f7f7f7;
+  border: 10px solid #e0e0e0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.sims4-theme .projector-body {
+  background-color: #e0e0e0;
+}
+
+.sims4-theme .projector-lens {
+  background-color: #999;
+  border: 5px solid #e0e0e0;
+}
+
+.sims4-theme .film-reel {
+  background-color: #e0e0e0;
+  border: 5px solid #ccc;
+}
+
+.sims4-theme .projector-crank {
+  background-color: #999;
+}
+
+.sims4-theme .reel {
+  transition: all 0.2s;
+}
+
+.sims4-theme .reel:hover {
+  transform: scale(1.1);
+}
+
+.sims4-theme .reel-film {
+  background-color: #e0e0e0;
+  border: 5px dashed #ccc;
+}
+
+.sims4-theme .reel:hover .reel-film {
+  border-color: #FF794D;
+  box-shadow: 0 0 15px rgba(255, 121, 77, 0.5);
+}
+
+.sims4-theme .reel span {
+  color: #333;
+}
+
+.sims4-theme .instruction {
+  color: #666;
+}
+
+/* Laboratoire */
+.sims4-theme .lab-table {
+  background-color: white;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.sims4-theme .lab-display {
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+}
+
+.sims4-theme #gl4d-canvas {
+  background-color: #000;
+}
+
+.sims4-theme .flask::before {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.sims4-theme .flask::after {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.sims4-theme .flask-liquid.green {
+  background-color: #54CF45;
+  box-shadow: 0 0 10px rgba(84, 207, 69, 0.5);
+}
+
+.sims4-theme .flask-liquid.blue {
+  background-color: #0098DC;
+  box-shadow: 0 0 10px rgba(0, 152, 220, 0.5);
+}
+
+.sims4-theme .flask-liquid.red {
+  background-color: #FF794D;
+  box-shadow: 0 0 10px rgba(255, 121, 77, 0.5);
+}
+
+.sims4-theme .cauldron {
+  background-color: #e0e0e0;
+}
+
+.sims4-theme .cauldron-liquid {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.sims4-theme .mix-button {
+  background: linear-gradient(to bottom, #9F6ADE, #8653c5);
+  box-shadow: 0 4px 0 #724aa8;
+  color: white;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sims4-theme .mix-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #724aa8;
+}
+
+.sims4-theme .lab-instructions {
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.sims4-theme .lab-instructions h3 {
+  color: #9F6ADE;
+}
+
+.sims4-theme .lab-instructions li {
+  color: #666;
+}
+
+.sims4-theme .formula {
+  color: #9F6ADE;
+  text-shadow: none;
+}
+
+/* Viewers */
+.sims4-theme .model-viewer, 
+.sims4-theme .artwork-viewer, 
+.sims4-theme .game-viewer {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+}
+
+.sims4-theme .viewer-header {
+  background: linear-gradient(90deg, #17BA7F, #15A470);
+}
+
+.sims4-theme .model-info, 
+.sims4-theme .artwork-info, 
+.sims4-theme .game-info {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+.sims4-theme .model-info h4, 
+.sims4-theme .artwork-info h4, 
+.sims4-theme .game-info h4 {
+  color: #17BA7F;
+}
+
+/* Notifications */
+.sims4-theme .notification {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  border: none;
+}
+
+.sims4-theme .notification-header {
+  background: linear-gradient(to right, #17BA7F, #15A470);
+}
+
+.sims4-theme .notification-content {
+  color: #666;
+}
+
+/* Bouton de bascule du thème */
+.sims4-theme .theme-toggle {
+  border: none;
+}
+
+/* Réponse adaptative */
+@media (max-width: 768px) {
+  .sims4-theme .arcade-title {
+      font-size: 20px;
+  }
+  
+  .sims4-theme .zone-header h2 {
+      font-size: 16px;
+  }
+  
+  .sims4-theme .controls-instructions-container {
+      flex-direction: column;
+  }
+}
+
+/* Styles de base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--primary-font);
+  background-color: var(--arcade-dark);
+  color: var(--arcade-light);
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Écran de chargement (amélioré mais avec des éléments du style Sims) */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(125deg, #121212, #1a0038, #000820);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 1s ease-in-out;
+}
+
+.loading-plumbob {
+  width: 60px;
+  height: 60px;
+  background-color: var(--plumbob-green);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  animation: rotate 2s linear infinite, glow 1.5s ease-in-out infinite;
+  margin-bottom: 30px;
+  filter: drop-shadow(0 0 15px rgba(84, 207, 69, 0.8));
+}
+
+@keyframes rotate {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+@keyframes glow {
+  0% {
+      filter: brightness(1) drop-shadow(0 0 10px rgba(84, 207, 69, 0.8));
+  }
+  50% {
+      filter: brightness(1.3) drop-shadow(0 0 20px rgba(84, 207, 69, 0.9));
+  }
+  100% {
+      filter: brightness(1) drop-shadow(0 0 10px rgba(84, 207, 69, 0.8));
+  }
+}
+
+.loading-bar {
+  width: 300px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  position: relative;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.loading-progress {
+  height: 100%;
+  background: linear-gradient(to right, var(--arcade-blue), var(--arcade-accent));
+  border-radius: 5px;
+  width: 0%;
+  box-shadow: 0 0 10px var(--arcade-blue-glow);
+  animation: progress 3s ease-in-out forwards;
+}
+
+@keyframes progress {
+  0% {
+      width: 0%;
+  }
+  20% {
+      width: 20%;
+  }
+  40% {
+      width: 40%;
+  }
+  60% {
+      width: 60%;
+  }
+  80% {
+      width: 80%;
+  }
+  95% {
+      width: 95%;
+  }
+  100% {
+      width: 100%;
+  }
+}
+
+.loading-tips {
+  max-width: 80%;
+  text-align: center;
+  font-style: italic;
+  color: white;
+  padding: 15px 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  border: 1px solid var(--arcade-blue);
+  box-shadow: 0 0 20px var(--arcade-blue-glow);
+  font-size: 14px;
+  animation: pulse 2s infinite;
+  margin-bottom: 15px;
+}
+
+.loading-subtitle {
+  font-family: var(--arcade-font);
+  font-size: 12px;
+  color: var(--arcade-green);
+  text-shadow: 0 0 10px var(--arcade-green-glow);
+  letter-spacing: 1px;
+}
+
+@keyframes pulse {
+  0%, 100% {
+      opacity: 0.8;
+  }
+  50% {
+      opacity: 1;
+  }
+}
+
+/* Loader de page complète */
+.full-page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--arcade-darker);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  transition: opacity 0.5s ease;
+}
+
+.loader-spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--arcade-accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+/* Univers Arcade Principal */
+.arcade-universe {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Personnage d'info style Sims amélioré */
+.character-info {
+  position: fixed;
+  top: 30px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  z-index: 90;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.character-info:hover {
+  transform: scale(1.1);
+}
+
+.plumbob {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  left: 50%;
+  top: -25px;
+  transform: translateX(-50%);
+  z-index: 2;
+  background-color: var(--plumbob-green);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  filter: drop-shadow(0 0 5px rgba(84, 207, 69, 0.8));
+  animation: character-rotate 3s linear infinite, character-float 2s ease-in-out infinite;
+}
+
+@keyframes character-float {
+  0%, 100% {
+      top: -25px;
+  }
+  50% {
+      top: -30px;
+  }
+}
+
+@keyframes character-rotate {
+  0% {
+      transform: translateX(-50%) rotate(0deg);
+  }
+  100% {
+      transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--plumbob-green);
+  box-shadow: 0 0 15px rgba(84, 207, 69, 0.5);
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: var(--arcade-dark);
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Panneau d'informations */
+.info-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
+  background-color: var(--panel-bg);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 15px var(--arcade-blue-glow);
+  z-index: 100;
+  border: 2px solid var(--arcade-blue);
+  animation: panel-fade-in 0.3s ease-out;
+}
+
+@keyframes panel-fade-in {
+  from {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.9);
+  }
+  to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.info-header {
+  background: linear-gradient(90deg, var(--plumbob-green), #3aa82a);
+  padding: 15px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.info-header h3 {
+  margin: 0;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: transform 0.2s;
+}
+
+.close-btn:hover {
+  transform: scale(1.2);
+}
+
+.info-content {
+  padding: 20px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.info-section {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.info-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--arcade-blue);
+  box-shadow: 0 0 20px var(--arcade-blue-glow);
+  flex: 0 0 auto;
+}
+
+.info-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info-details {
+  flex: 1;
+}
+
+.info-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--arcade-green);
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px var(--arcade-green-glow);
+}
+
+.info-bio {
+  color: var(--arcade-light);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.info-skills {
+  margin-top: 25px;
+}
+
+.info-skills h4 {
+  font-weight: 600;
+  color: var(--arcade-blue);
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 8px;
+  text-shadow: 0 0 8px var(--arcade-blue-glow);
+}
+
+.skill {
+  margin-bottom: 15px;
+}
+
+.skill-name {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.skill-level {
+  background-color: var(--arcade-accent);
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  box-shadow: 0 0 10px var(--arcade-accent-glow);
+}
+
+.skill-bar {
+  width: 100%;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.skill-progress {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(to right, var(--arcade-green), var(--arcade-blue));
+  width: 0%;
+  transition: width 1s ease-out;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+}
+
+.info-traits {
+  margin-top: 25px;
+}
+
+.info-traits h4 {
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: var(--arcade-yellow);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 8px;
+  text-shadow: 0 0 8px var(--arcade-yellow-glow);
+}
+
+.traits-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style-type: none;
+}
+
+.trait {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.trait:hover {
+  transform: translateY(-3px);
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.trait:nth-child(1) {
+  border-color: var(--arcade-green);
+  color: var(--arcade-green);
+  text-shadow: 0 0 5px var(--arcade-green-glow);
+}
+
+.trait:nth-child(2) {
+  border-color: var(--arcade-blue);
+  color: var(--arcade-blue);
+  text-shadow: 0 0 5px var(--arcade-blue-glow);
+}
+
+.trait:nth-child(3) {
+  border-color: var(--arcade-accent);
+  color: var(--arcade-accent);
+  text-shadow: 0 0 5px var(--arcade-accent-glow);
+}
+
+/* Boutons de navigation */
+.map-button, .audio-control {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 80;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--arcade-blue);
+}
+
+.map-button {
+  top: 20px;
+  right: 20px;
+}
+
+.audio-control {
+  bottom: 20px;
+  right: 20px;
+}
+
+.map-button:hover, .audio-control:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px var(--arcade-blue-glow);
+}
+
+.map-button i, .audio-control i {
+  color: var(--arcade-blue);
+  font-size: 20px;
+  text-shadow: 0 0 10px var(--arcade-blue-glow);
+}
+
+/* Audio control muted state */
+.audio-control.muted i {
+  color: var(--arcade-red);
+  text-shadow: 0 0 10px var(--arcade-red-glow);
+}
+.audio-control.muted {
+  border-color: var(--arcade-red);
+}
+
+/* Overlay Carte */
+.map-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 95;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease;
+}
+
+.map-container {
+  width: 90%;
+  max-width: 800px;
+  height: 80%;
+  max-height: 600px;
+  background-color: var(--panel-bg);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--arcade-accent-glow);
+  border: 2px solid var(--arcade-accent);
+  display: flex;
+  flex-direction: column;
+}
+
+.map-container h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--arcade-accent);
+  font-family: var(--arcade-font);
+  font-size: 16px;
+  text-shadow: 0 0 10px var(--arcade-accent-glow);
+  letter-spacing: 2px;
+}
+
+.map-image {
+  flex: 1;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  background-image: url('img/map-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.map-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+  pointer-events: none;
+}
+
+.map-hotspot {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.map-hotspot:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.hotspot-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: var(--arcade-blue);
+  box-shadow: 0 0 15px var(--arcade-blue-glow);
+  animation: hotspot-pulse 2s infinite;
+}
+
+.map-hotspot:nth-child(2) .hotspot-dot {
+  background-color: var(--arcade-green);
+  box-shadow: 0 0 15px var(--arcade-green-glow);
+}
+
+.map-hotspot:nth-child(3) .hotspot-dot {
+  background-color: var(--arcade-yellow);
+  box-shadow: 0 0 15px var(--arcade-yellow-glow);
+}
+
+.map-hotspot:nth-child(4) .hotspot-dot {
+  background-color: var(--arcade-red);
+  box-shadow: 0 0 15px var(--arcade-red-glow);
+}
+
+.map-hotspot:nth-child(5) .hotspot-dot {
+  background-color: var(--arcade-accent);
+  box-shadow: 0 0 15px var(--arcade-accent-glow);
+}
+
+.main-spot {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes hotspot-pulse {
+  0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+  }
+  50% {
+      transform: scale(1.3);
+      opacity: 0.7;
+  }
+}
+
+.map-hotspot span {
+  margin-top: 5px;
+  font-size: 10px;
+  color: white;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2px 6px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.map-close {
+  padding: 8px 20px;
+  background: linear-gradient(90deg, var(--arcade-accent), #d000d0);
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-family: var(--primary-font);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  align-self: center;
+}
+
+.map-close:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 10px var(--arcade-accent-glow);
+}
+
+/* Animation de transition entre zones */
+.zone-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.transition-effect {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 0%, var(--arcade-dark) 100%);
+  animation: transition-zoom 1s forwards;
+}
+
+@keyframes transition-zoom {
+  0% {
+      transform: scale(0);
+      opacity: 0;
+  }
+  50% {
+      opacity: 1;
+  }
+  100% {
+      transform: scale(2);
+      opacity: 0;
+  }
+}
+
+/* Monde Arcade Principal */
+.arcade-world {
+  position: relative;
+  min-height: 100vh;
+  padding: 80px 20px 40px;
+  overflow: hidden;
+}
+
+/* Background effet et décorations */
+.arcade-world::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(40, 0, 80, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.arcade-hall {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.arcade-title {
+  text-align: center;
+  font-family: var(--arcade-font);
+  font-size: 28px;
+  margin-top: 20px;
+  margin-bottom: 100px;
+  color: white;
+  text-shadow: 0 0 10px var(--arcade-blue-glow), 0 0 20px var(--arcade-blue-glow);
+  animation: title-glow 2s infinite;
+}
+
+@keyframes title-glow {
+  0%, 100% {
+      text-shadow: 0 0 10px var(--arcade-blue-glow), 0 0 20px var(--arcade-blue-glow);
+      color: white;
+  }
+  50% {
+      text-shadow: 0 0 15px var(--arcade-accent-glow), 0 0 30px var(--arcade-accent-glow);
+      color: var(--arcade-accent);
+  }
+}
+
+.arcade-machines {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  width: 100%;
+}
+
+.arcade-machine-spot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.arcade-machine-spot:hover {
+  transform: translateY(-10px);
+}
+
+.arcade-machine-spot:hover .glow-effect {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.machine-preview {
+  width: 180px; /* Réduit de 200px à 180px */
+  height: 180px; /* Réduit de 200px à 180px */
+  position: relative;
+  margin-bottom: 25px; /* Augmenté de 20px à 25px */
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.machine-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.arcade-machine-spot:hover .machine-preview img {
+  transform: scale(1.1);
+}
+
+.glow-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: 2px solid var(--arcade-blue);
+  box-shadow: 0 0 20px var(--arcade-blue-glow);
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.arcade-machine-spot:nth-child(2) .glow-effect {
+  border-color: var(--arcade-green);
+  box-shadow: 0 0 20px var(--arcade-green-glow);
+}
+
+.arcade-machine-spot:nth-child(3) .glow-effect {
+  border-color: var(--arcade-yellow);
+  box-shadow: 0 0 20px var(--arcade-yellow-glow);
+}
+
+.arcade-machine-spot:nth-child(4) .glow-effect {
+  border-color: var(--arcade-red);
+  box-shadow: 0 0 20px var(--arcade-red-glow);
+}
+
+.arcade-machine-spot:nth-child(5) .glow-effect {
+  border-color: var(--arcade-accent);
+  box-shadow: 0 0 20px var(--arcade-accent-glow);
+}
+
+.machine-label {
+  text-align: center;
+}
+
+.machine-label h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: var(--arcade-blue);
+  font-weight: 600;
+  text-shadow: 0 0 10px var(--arcade-blue-glow);
+  transition: all 0.3s ease;
+}
+
+.arcade-machine-spot:nth-child(2) .machine-label h3 {
+  color: var(--arcade-green);
+  text-shadow: 0 0 10px var(--arcade-green-glow);
+}
+
+.arcade-machine-spot:nth-child(3) .machine-label h3 {
+  color: var(--arcade-yellow);
+  text-shadow: 0 0 10px var(--arcade-yellow-glow);
+}
+
+.arcade-machine-spot:nth-child(4) .machine-label h3 {
+  color: var(--arcade-red);
+  text-shadow: 0 0 10px var(--arcade-red-glow);
+}
+
+.arcade-machine-spot:nth-child(5) .machine-label h3 {
+  color: var(--arcade-accent);
+  text-shadow: 0 0 10px var(--arcade-accent-glow);
+}
+
+.machine-label p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Décorations du hall principal */
+.decorations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.floating-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--arcade-blue);
+  opacity: 0.6;
+  filter: blur(2px);
+  animation: float-particle 15s infinite linear;
+}
+
+.particle-1 {
+  top: 20%;
+  left: 10%;
+  background-color: var(--arcade-blue);
+  box-shadow: 0 0 15px var(--arcade-blue-glow);
+  animation-duration: 20s;
+}
+
+.particle-2 {
+  top: 50%;
+  right: 15%;
+  background-color: var(--arcade-accent);
+  box-shadow: 0 0 15px var(--arcade-accent-glow);
+  animation-duration: 25s;
+  animation-delay: 5s;
+}
+
+.particle-3 {
+  bottom: 30%;
+  left: 25%;
+  background-color: var(--arcade-green);
+  box-shadow: 0 0 15px var(--arcade-green-glow);
+  animation-duration: 18s;
+  animation-delay: 2s;
+}
+
+@keyframes float-particle {
+  0% {
+      transform: translate(0, 0) scale(1);
+  }
+  25% {
+      transform: translate(100px, -50px) scale(1.5);
+  }
+  50% {
+      transform: translate(50px, -100px) scale(1);
+  }
+  75% {
+      transform: translate(-100px, -25px) scale(1.5);
+  }
+  100% {
+      transform: translate(0, 0) scale(1);
+  }
+}
+
+
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+      text-shadow: 0 0 10px var(--arcade-accent-glow), 0 0 20px var(--arcade-accent-glow), 0 0 30px var(--arcade-accent-glow);
+      opacity: 1;
+  }
+  20%, 24%, 55% {
+      text-shadow: none;
+      opacity: 0.8;
+  }
+}
+
+
+/* Styles pour les zones */
+.zone {
+  position: relative;
+  min-height: 100vh;
+  padding: 70px 20px 40px;
+  transition: all 0.5s ease-in-out;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@keyframes demo-transition {
+  0% {
+    box-shadow: inset 0 0 20px var(--arcade-accent-glow);
+    opacity: 0.7;
+  }
+  50% {
+    box-shadow: inset 0 0 50px var(--arcade-accent-glow);
+    opacity: 1;
+  }
+  100% {
+    box-shadow: inset 0 0 20px var(--arcade-accent-glow);
+    opacity: 0.9;
+  }
+}
+
+.demo-transition {
+  animation: demo-transition 1s ease-in-out;
+}
+
+.demo-video::-webkit-media-controls {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.zone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.zone-header h2 {
+  font-family: var(--arcade-font);
+  font-size: 16px;
+  color: var(--arcade-blue);
+  text-shadow: 0 0 10px var(--arcade-blue-glow);
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: var(--arcade-light);
+  font-family: var(--primary-font);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s;
+}
+
+.back-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateX(-5px);
+}
+
+/* ===== ZONE 1: MACHINE À PINCE ===== */
+.claw-machine-zone .zone-header h2 {
+  color: var(--arcade-blue);
+  text-shadow: 0 0 10px var(--arcade-blue-glow);
+}
+
+.claw-game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.claw-game-area {
+  width: 100%;
+  height: 500px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  border: 3px solid var(--arcade-blue);
+  box-shadow: 0 0 20px var(--arcade-blue-glow);
+  margin-bottom: 30px;
+}
+
+.claw {
+  position: absolute;
+  width: 60px;
+  height: 80px;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%);
+  transition: left 0.3s, top 0.3s;
+  z-index: 10;
+}
+
+.claw-base {
+  width: 40px;
+  height: 20px;
+  background-color: #888;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.claw-arm {
+  width: 4px;
+  height: 30px;
+  background-color: #777;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.claw-grip {
+  width: 15px;
+  height: 30px;
+  background-color: #777;
+  position: absolute;
+  top: 50px;
+  border-radius: 0 0 5px 5px;
+}
+
+.claw-grip.left {
+  left: 10px;
+  transform: rotate(-20deg);
+  transform-origin: top left;
+}
+
+.claw-grip.right {
+  right: 10px;
+  transform: rotate(20deg);
+  transform-origin: top right;
+}
+
+.claw.grabbing .claw-grip.left {
+  transform: rotate(0deg);
+}
+
+.claw.grabbing .claw-grip.right {
+  transform: rotate(0deg);
+}
+
+.capsule-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 100px 50px 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.model-capsule {
+  width: 80px;
+  height: 80px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  animation: float 3s ease-in-out infinite;
+}
+
+.model-capsule img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+}
+
+.model-capsule.grabbed {
+  border-color: var(--arcade-blue);
+  box-shadow: 0 0 20px var(--arcade-blue-glow);
+}
+
+
+.claw-controls {
+  position: relative; /* Changé de absolute à relative */
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  flex: 1; /* Pour qu'il prenne une partie égale de l'espace */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.controls-instructions-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.direction-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 40px);
+  grid-template-rows: repeat(3, 40px);
+  gap: 5px;
+}
+
+.direction-pad button {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.direction-pad button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+#up-btn {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#left-btn {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+#right-btn {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+#down-btn {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.grab-button {
+  background: linear-gradient(to bottom, var(--arcade-red), #d00);
+  border: none;
+  color: white;
+  font-family: var(--arcade-font);
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #a00;
+  transition: all 0.1s;
+  letter-spacing: 1px;
+}
+
+.grab-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #a00;
+}
+
+.grab-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #a00;
+}
+
+.instructions {
+  margin-top: 20px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 600px;
+}
+
+.instructions h3 {
+  margin-bottom: 10px;
+  color: var(--arcade-blue);
+  font-size: 16px;
+}
+
+.instructions p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.keyboard-tip {
+  margin-top: 10px;
+  font-style: italic;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== ZONE 2: GALERIE D'ART ===== */
+.art-gallery-zone .zone-header h2 {
+  color: var(--arcade-green);
+  text-shadow: 0 0 10px var(--arcade-green-glow);
+}
+
+.dark-gallery {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  background-color: rgb(10, 10, 15);
+  border-radius: 15px;
+  overflow: hidden;
+  border: 3px solid var(--arcade-green);
+  box-shadow: 0 0 20px var(--arcade-green-glow);
+}
+
+.gallery-instruction {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-align: center;
+  z-index: 10;
+}
+
+.gallery-instruction p {
+  color: var(--arcade-green);
+  font-size: 14px;
+  text-shadow: 0 0 10px var(--arcade-green-glow);
+}
+
+.artwork-wall {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.artwork {
+  position: absolute;
+  width: 200px;
+  height: 150px;
+  opacity: 0.1;
+  transition: opacity 0.5s;
+  cursor: pointer;
+}
+
+.artwork img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 2px solid var(--arcade-green);
+}
+
+.artwork-frame {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border: 5px solid #5a3921;
+  background-color: #3a2513;
+  z-index: -1;
+}
+
+.flashlight {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%);
+  pointer-events: none;
+  z-index: 5;
+  transform: translate(-50%, -50%);
+  opacity: 0.8;
+}
+
+/* ===== ZONE 3: BORNE D'ARCADE ===== */
+.arcade-machine-zone .zone-header h2 {
+  color: var(--arcade-yellow);
+  text-shadow: 0 0 10px var(--arcade-yellow-glow);
+}
+
+.arcade-cabinet {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.cabinet-frame {
+  width: 100%;
+  max-width: 600px;
+  height: 700px;
+  background-color: #222;
+  border-radius: 15px 15px 0 0;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.cabinet-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background-color: #333;
+  border-radius: 15px 15px 0 0;
+}
+
+.cabinet-frame::after {
+  content: 'GAME ZONE';
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--arcade-font);
+  font-size: 14px;
+  color: var(--arcade-yellow);
+  text-shadow: 0 0 10px var(--arcade-yellow-glow);
+}
+
+.cabinet-screen {
+  width: 100%;
+  height: 400px;
+  background-color: black;
+  margin-top: 60px;
+  border: 10px solid #444;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.cabinet-controls {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.joystick {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.joystick-base {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background-color: #333;
+  border-radius: 50%;
+  box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.joystick-stick {
+  position: absolute;
+  width: 20px;
+  height: 60px;
+  background-color: #555;
+  border-radius: 5px;
+  top: 10px;
+  left: 30px;
+  transform-origin: bottom center;
+  transition: transform 0.2s;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.arcade-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.3), inset 0 5px 10px rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.arcade-btn:active {
+  transform: translateY(5px);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.3), inset 0 5px 10px rgba(255, 255, 255, 0.2);
+}
+
+.arcade-btn.red {
+  background-color: var(--arcade-red);
+}
+
+.arcade-btn.blue {
+  background-color: var(--arcade-blue);
+}
+
+.arcade-btn.green {
+  background-color: var(--arcade-green);
+}
+
+.arcade-btn.yellow {
+  background-color: var(--arcade-yellow);
+}
+
+.game-selection {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-selection-title {
+  font-family: var(--arcade-font);
+  font-size: 24px;
+  color: var(--arcade-yellow);
+  text-shadow: 0 0 10px var(--arcade-yellow-glow);
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.game-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  width: 100%;
+  padding: 10px;
+  max-height: 300px;
+}
+
+.game-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.game-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.game-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 2px solid var(--arcade-blue);
+}
+
+.game-item span {
+  color: white;
+  font-family: var(--arcade-font);
+  font-size: 12px;
+}
+
+/* ===== ZONE 4: PROJECTEUR ===== */
+.projector-zone .zone-header h2 {
+  color: var(--arcade-red);
+  text-shadow: 0 0 10px var(--arcade-red-glow);
+}
+
+.cinema-setup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.projector-device {
+  width: 300px;
+  height: 150px;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.projector-body {
+  width: 200px;
+  height: 80px;
+  background-color: #333;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.projector-lens {
+  width: 40px;
+  height: 40px;
+  background-color: #222;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  border: 5px solid #444;
+}
+
+.projector-light {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 300px;
+  height: 100px;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%);
+  clip-path: polygon(0 0, 100% 40%, 100% 60%, 0 100%);
+  opacity: 0.5;
+  z-index: -1;
+  animation: projector-light 2s infinite alternate;
+}
+
+@keyframes projector-light {
+  0% {
+      opacity: 0.4;
+  }
+  100% {
+      opacity: 0.6;
+  }
+}
+
+.film-reel {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #222;
+  border: 5px solid #444;
+  position: absolute;
+  top: 0;
+  animation: reel-spin 5s linear infinite;
+}
+
+.film-reel.left {
+  left: 20px;
+}
+
+.film-reel.right {
+  right: 20px;
+}
+
+@keyframes reel-spin {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+.projector-crank {
+  width: 15px;
+  height: 50px;
+  background-color: #666;
+  position: absolute;
+  top: 30px;
+  left: 50px;
+  transform-origin: center top;
+  cursor: pointer;
+  animation: crank-wobble 1s infinite alternate;
+}
+
+.projector-crank::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #666;
+  border-radius: 50%;
+  bottom: -10px;
+  left: -2.5px;
+}
+
+@keyframes crank-wobble {
+  0% {
+      transform: rotate(-5deg);
+  }
+  100% {
+      transform: rotate(5deg);
+  }
+}
+
+.cinema-screen {
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 10px solid #555;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.screen-content {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+}
+
+.screen-content video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.film-selection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.reel-container {
+  display: flex;
+  gap: 20px;
+}
+
+.reel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.reel:hover {
+  transform: scale(1.1);
+}
+
+.reel-film {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #333;
+  border: 5px dashed #666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.reel-film::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #222;
+  border-radius: 50%;
+  border: 2px solid #444;
+}
+
+.reel:hover .reel-film {
+  border-color: var(--arcade-red);
+  box-shadow: 0 0 15px var(--arcade-red-glow);
+}
+
+.reel span {
+  font-family: var(--primary-font);
+  font-size: 14px;
+  color: var(--arcade-light);
+}
+
+.instruction {
+  font-style: italic;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 10px;
+}
+
+/* ===== ZONE 5: LABORATOIRE GL4D ===== */
+.gl4d-lab-zone .zone-header h2 {
+  color: var(--arcade-accent);
+  text-shadow: 0 0 10px var(--arcade-accent-glow);
+}
+
+.lab-setup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.lab-table {
+  width: 100%;
+  max-width: 800px;
+  height: 500px;
+  background-color: #222;
+  border-radius: 15px;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  border: 3px solid var(--arcade-accent);
+  box-shadow: 0 0 20px var(--arcade-accent-glow);
+}
+
+.lab-display {
+  width: 100%;
+  height: 300px;
+  background-color: #111;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--arcade-accent);
+  box-shadow: 0 0 15px var(--arcade-accent-glow);
+  position: relative;
+}
+
+#gl4d-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-color: #000;
+}
+
+.demo-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #000;
+  border-radius: 8px;
+  display: none; /* Masquées par défaut */
+}
+
+
+.lab-equipment {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.equipment-row {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.lab-item {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lab-item:hover {
+  transform: translateY(-5px);
+}
+
+.flask {
+  width: 60px;
+  height: 80px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.flask::before {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.1);
+  bottom: 0;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.flask::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  top: 0;
+  border-radius: 5px;
+}
+
+.flask-liquid {
+  position: absolute;
+  width: 36px;
+  height: 40px;
+  bottom: 2px;
+  border-radius: 0 0 18px 18px;
+  animation: liquid-bubble 3s infinite;
+}
+
+@keyframes liquid-bubble {
+  0%, 100% {
+      height: 40px;
+  }
+  50% {
+      height: 42px;
+  }
+}
+
+.flask-liquid.green {
+  background-color: var(--arcade-green);
+  box-shadow: 0 0 10px var(--arcade-green-glow);
+}
+
+.flask-liquid.blue {
+  background-color: var(--arcade-blue);
+  box-shadow: 0 0 10px var(--arcade-blue-glow);
+}
+
+.flask-liquid.red {
+  background-color: var(--arcade-red);
+  box-shadow: 0 0 10px var(--arcade-red-glow);
+}
+
+.flask-label {
+  position: absolute;
+  bottom: -25px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--arcade-light);
+  width: 100%;
+}
+
+.mixer-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.cauldron {
+  width: 100px;
+  height: 60px;
+  background-color: #333;
+  border-radius: 50% 50% 10px 10px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.cauldron-liquid {
+  position: absolute;
+  width: 100%;
+  height: 30px;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.5s;
+}
+
+.mix-button {
+  padding: 8px 20px;
+  background: linear-gradient(to bottom, var(--arcade-accent), #d000d0);
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-family: var(--primary-font);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 0 #7a007a;
+}
+
+.mix-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #7a007a;
+}
+
+.mix-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #7a007a;
+}
+
+.lab-instructions {
+  max-width: 600px;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lab-instructions h3 {
+  color: var(--arcade-accent);
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 18px;
+  text-shadow: 0 0 10px var(--arcade-accent-glow);
+}
+
+.lab-instructions ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.lab-instructions li {
+  margin: 12px 0;
+  font-size: 14px;
+  color: var(--arcade-light);
+  padding-left: 20px;
+  position: relative;
+}
+
+.lab-instructions li:before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--arcade-accent);
+}
+
+/* Mise en évidence des combinaisons disponibles en vidéo */
+.video-demo {
+  color: var(--arcade-accent) !important;
+  font-weight: bold;
+}
+
+.video-demo:before {
+  content: '★' !important;
+  color: var(--arcade-accent) !important;
+}
+
+/* Style pour les formules de mélange */
+.formula {
+  font-weight: bold;
+  color: var(--arcade-accent);
+  text-shadow: 0 0 5px var(--arcade-accent-glow);
+}
+
+/* ===== VISIONNEURS/VISIONNEUSES ===== */
+.model-viewer, .artwork-viewer, .game-viewer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 1000px;
+  height: 85%;
+  background-color: var(--panel-bg);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  z-index: 500;  /* Augmentez cette valeur pour être sûr qu'elle est plus élevée que d'autres éléments */
+  display: flex;
+  flex-direction: column;
+  animation: panel-fade-in 0.3s ease-out;
+}
+
+/* ===== NOTIFICATIONS ===== */
+.notification-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+  max-width: 350px;
+}
+
+/* ===== MEDIA QUERIES ===== */
+@media (max-width: 992px) {
+  .claw-game-area {
+      height: 400px;
+  }
+
+  .arcade-cabinet {
+      transform: scale(0.85);
+  }
+
+  .cinema-screen {
+      height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .arcade-title {
+      font-size: 20px;
+  }
+
+  .arcade-machines {
+      gap: 30px;
+  }
+
+  .machine-preview {
+      width: 150px;
+      height: 150px;
+  }
+
+  .claw-game-area {
+      height: 350px;
+  }
+
+  .direction-pad {
+      grid-template-columns: repeat(3, 30px);
+      grid-template-rows: repeat(3, 30px);
+  }
+
+  .dark-gallery {
+      height: 450px;
+  }
+
+  .arcade-cabinet {
+      transform: scale(0.75);
+  }
+
+  .cinema-screen {
+      height: 250px;
+  }
+
+  .projector-device {
+      transform: scale(0.8);
+  }
+
+  .lab-table {
+      height: auto;
+  }
+}
+  @media (max-width: 768px) {
+    .arcade-title {
+        font-size: 20px;
+    }
+
+    .arcade-machines {
+        gap: 30px;
+    }
+
+    .machine-preview {
+        width: 150px;
+        height: 150px;
+    }
+
+    .claw-game-area {
+        height: 350px;
+    }
+
+    .direction-pad {
+        grid-template-columns: repeat(3, 30px);
+        grid-template-rows: repeat(3, 30px);
+    }
+
+    .dark-gallery {
+        height: 450px;
+    }
+
+    .arcade-cabinet {
+        transform: scale(0.75);
+    }
+
+    .cinema-screen {
+        height: 250px;
+    }
+
+    .projector-device {
+        transform: scale(0.8);
+    }
+
+    .lab-table {
+        height: auto;
+        padding-bottom: 100px;
+    }
+
+    .artwork {
+        width: 150px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 576px) {
+    .loading-progress {
+        width: 250px;
+    }
+
+    .loading-tips {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .arcade-title {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+
+    .machine-preview {
+        width: 120px;
+        height: 120px;
+    }
+
+    .machine-label h3 {
+        font-size: 16px;
+    }
+
+    .machine-label p {
+        font-size: 12px;
+    }
+
+    .zone-header h2 {
+        font-size: 14px;
+    }
+
+    .claw-game-area {
+        height: 300px;
+    }
+
+    .dark-gallery {
+        height: 350px;
+    }
+
+    .artwork {
+        width: 100px;
+        height: 80px;
+    }
+
+    .cabinet-frame {
+        transform: scale(0.6);
+        transform-origin: top center;
+    }
+
+    .cinema-screen {
+        height: 200px;
+    }
+
+    .reel-container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .lab-table {
+        padding: 10px;
+    }
+
+    .lab-display {
+        height: 200px;
+    }
+
+    .equipment-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .info-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .info-avatar {
+        margin: 0 auto 20px;
+    }
+}
+
+/* Animation pour les bulles du chaudron */
+@keyframes bubble-rise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-50px) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* Styles pour les visionneuses de détails */
+.viewer-header {
+    background: linear-gradient(90deg, var(--arcade-blue), #007ACC);
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.viewer-header h3 {
+    margin: 0;
+    color: white;
+}
+
+.viewer-content {
+    padding: 20px;
+    overflow-y: auto;
+    height: calc(100% - 60px);
+}
+
+/* Styles pour l'affichage de modèle 3D */
+model-viewer {
+    width: 100%;
+    height: 400px;
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+/* Styles pour la visionneuse d'art */
+.artwork-display {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.artwork-display img {
+    max-width: 100%;
+    max-height: 60vh;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* Styles supplémentaires pour améliorer l'interface */
+.pressed {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.3), inset 0 5px 10px rgba(255, 255, 255, 0.2) !important;
+}
+
+.selected {
+    border-color: var(--arcade-accent) !important;
+    box-shadow: 0 0 20px var(--arcade-accent-glow) !important;
+}
+
+/* Animation pour les bulles */
+@keyframes bubble-float {
+    0% {
+        transform: translateY(0);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+}
+
+/* Style pour les notifications */
+.notification {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 10px;
+    margin: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px var(--arcade-accent-glow);
+    border: 1px solid var(--arcade-accent);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 350px;
+}
+
+.notification.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background-color: var(--arcade-accent);
+}
+
+.notification-header h4 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.notification-content {
+    padding: 10px 15px;
+}
+
+.close-notification {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Animations supplémentaires pour l'ambiance */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Styles pour les vignettes de visualisation */
+.model-info, .artwork-info, .game-info {
+    background-color: rgba(0,0,0,0.2);
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.model-info h4, .artwork-info h4, .game-info h4 {
+    color: var(--arcade-blue);
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.model-info p, .artwork-info p, .game-info p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+/* Style pour le bouton de téléchargement */
+.download-button {
+    background: linear-gradient(to bottom, var(--arcade-yellow), #b3b300);
+    border: none;
+    color: black;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.2s;
+    display: inline-block;
+}
+
+.download-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.download-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}

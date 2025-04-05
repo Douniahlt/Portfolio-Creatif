@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Model Viewer pour les modèles 3D -->
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts - Poppins (moderne) + Press Start 2P (arcade) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Écran de chargement (style Sims conservé mais amélioré) -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-plumbob"></div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+        <div class="loading-tips">Astuce : Attrape des modèles 3D avec la machine à pince !</div>
+    </div>
+
+    <!-- Loader de page complète -->
+    <div class="full-page-loader" id="full-page-loader">
+        <div class="loader-spinner"></div>
+        <p>Préparation de l'univers interactif...</p>
+    </div>
+
+    <!-- Conteneur principal -->
+    <div class="arcade-universe">
+        <!-- Personnage d'info style Sims (conservé et amélioré) -->
+        <div class="character-info" id="character-info">
+            <!-- Le contenu sera injecté par JavaScript -->
+        </div>
+
+        <!-- Bouton carte/navigation -->
+        <div class="map-button" id="map-btn">
+            <i class="fas fa-map-marked-alt"></i>
+        </div>
+
+        <!-- Contrôle audio -->
+        <div class="audio-control" id="audio-control">
+            <i class="fas fa-volume-up"></i>
+        </div>
+
+        <!-- Carte/Plan de navigation -->
+        <div class="map-overlay hidden" id="map-overlay">
+            <div class="map-container">
+                <h3>Navigation</h3>
+                <div class="map-image">
+                    <!-- Image de la carte avec zones cliquables -->
+                    <div class="map-hotspot" data-zone="claw-machine" style="top: 20%; left: 15%;">
+                        <div class="hotspot-dot"></div>
+                        <span>Modèles 3D</span>
+                    </div>
+                    <div class="map-hotspot" data-zone="art-gallery" style="top: 30%; left: 45%;">
+                        <div class="hotspot-dot"></div>
+                        <span>Galerie</span>
+                    </div>
+                    <div class="map-hotspot" data-zone="arcade-machine" style="top: 60%; left: 25%;">
+                        <div class="hotspot-dot"></div>
+                        <span>Jeux</span>
+                    </div>
+                    <div class="map-hotspot" data-zone="projector" style="top: 40%; left: 75%;">
+                        <div class="hotspot-dot"></div>
+                        <span>Unreal</span>
+                    </div>
+                    <div class="map-hotspot" data-zone="gl4d-lab" style="top: 70%; left: 65%;">
+                        <div class="hotspot-dot"></div>
+                        <span>Laboratoire</span>
+                    </div>
+                    <div class="map-hotspot" data-zone="arcade-hall" style="top: 50%; left: 50%;">
+                        <div class="hotspot-dot main-spot"></div>
+                        <span>Accueil</span>
+                    </div>
+                </div>
+                <button class="map-close">Fermer</button>
+            </div>
+        </div>
+        
+        <!-- Animation de transition entre zones -->
+        <div class="zone-transition hidden" id="zone-transition">
+            <div class="transition-effect"></div>
+        </div>
+
+        <!-- Monde arcade principal -->
+        <div class="arcade-world" id="arcade-world">
+            <!-- Zone principale avec navigation vers les différentes "machines" -->
+            <div class="arcade-hall active-zone">
+                <h1 class="arcade-title">Portfolio</h1>
+                
+                <!-- Installations interactives dans la salle principale -->
+                <div class="arcade-machines">
+                    <!-- Machine à pince pour modèles 3D -->
+                    <div class="arcade-machine-spot" data-zone="claw-machine">
+                        <div class="machine-preview">
+                            <img src="img/claw.png" alt="Machine à pince">
+                            <div class="glow-effect"></div>
+                        </div>
+                        <div class="machine-label">
+                            <h3>Modèles 3D</h3>
+                            <p>Attrape des créations Blender</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Galerie d'art interactive -->
+                    <div class="arcade-machine-spot" data-zone="art-gallery">
+                        <div class="machine-preview">
+                            <img src="img/tableau.png" alt="Galerie d'art">
+                            <div class="glow-effect"></div>
+                        </div>
+                        <div class="machine-label">
+                            <h3>Galerie d'Art</h3>
+                            <p>Explore mes créations avec une lampe torche</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Borne d'arcade pour jeux Godot -->
+                    <div class="arcade-machine-spot" data-zone="arcade-machine">
+                        <div class="machine-preview">
+                            <img src="img/manette.png" alt="Borne d'arcade">
+                            <div class="glow-effect"></div>
+                        </div>
+                        <div class="machine-label">
+                            <h3>Jeux</h3>
+                            <p>Découvre mes jeux vidéo</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Projecteur pour scènes Unreal -->
+                    <div class="arcade-machine-spot" data-zone="projector">
+                        <div class="machine-preview">
+                            <img src="img/film.png" alt="Projecteur">
+                            <div class="glow-effect"></div>
+                        </div>
+                        <div class="machine-label">
+                            <h3>Scènes Unreal</h3>
+                            <p>Visionne mes environnements 3D</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Laboratoire pour GL4D -->
+                    <div class="arcade-machine-spot" data-zone="gl4d-lab">
+                        <div class="machine-preview">
+                            <img src="img/labo.png" alt="Laboratoire">
+                            <div class="glow-effect"></div>
+                        </div>
+                        <div class="machine-label">
+                            <h3>Labo</h3>
+                            <p>Mélange les fioles pour voir mes démos</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Éléments décoratifs animés -->
+                <div class="decorations">
+                    <div class="floating-particle particle-1"></div>
+                    <div class="floating-particle particle-2"></div>
+                    <div class="floating-particle particle-3"></div>
+                </div>
+            </div>
+            
+            <!-- ZONE : Machine à pince -->
+            <div class="zone claw-machine-zone hidden" id="claw-machine">
+                <div class="zone-header">
+                    <h2>Machine à Pince - Modèles 3D Blender</h2>
+                    <button class="back-btn" data-zone="arcade-hall"><i class="fas fa-arrow-left"></i> Retour</button>
+                </div>
+                
+                <div class="claw-game-container">
+                    <!-- Zone de jeu -->
+                    <div class="claw-game-area">
+                        <!-- La pince -->
+                        <div class="claw" id="claw">
+                            <div class="claw-base"></div>
+                            <div class="claw-arm"></div>
+                            <div class="claw-grip left"></div>
+                            <div class="claw-grip right"></div>
+                        </div>
+                        
+                        <!-- Capsules de modèles -->
+                        <div class="capsule-container">
+                            <div class="model-capsule" data-id="model1">
+                                <img src="img/personnage.png" alt="Personnage 3D">
+                            </div>
+                            <div class="model-capsule" data-id="model2">
+                                <img src="img/lanterne.png" alt="Environnement 3D">
+                            </div>
+                            <div class="model-capsule" data-id="model3">
+                                <img src="img/katana.jpeg" alt="Objet 3D">
+                            </div>
+                            <div class="model-capsule" data-id="model4">
+                                <img src="img/grenouille.jpeg" alt="Créature 3D">
+                            </div>
+                            <div class="model-capsule" data-id="model5">
+                                <img src="img/phare.jpeg" alt="Architecture 3D">
+                            </div>
+                        </div>
+                        
+                        <!-- Contrôles -->
+                        <div class="claw-controls">
+                            <div class="direction-pad">
+                                <button id="up-btn"><i class="fas fa-caret-up"></i></button>
+                                <button id="left-btn"><i class="fas fa-caret-left"></i></button>
+                                <button id="right-btn"><i class="fas fa-caret-right"></i></button>
+                                <button id="down-btn"><i class="fas fa-caret-down"></i></button>
+                            </div>
+                            <button id="grab-btn" class="grab-button">GRAB</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Instructions -->
+                    <div class="instructions">
+                        <h3>Comment jouer</h3>
+                        <p>Utilisez les flèches ou les boutons pour déplacer la pince, puis attrapez un modèle 3D pour le découvrir !</p>
+                        <p class="keyboard-tip">Vous pouvez aussi utiliser les flèches du clavier et la barre espace.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ZONE : Galerie d'art -->
+            <div class="zone art-gallery-zone hidden" id="art-gallery">
+                <div class="zone-header">
+                    <h2>Galerie d'Art</h2>
+                    <button class="back-btn" data-zone="arcade-hall"><i class="fas fa-arrow-left"></i> Retour</button>
+                </div>
+                
+                <div class="dark-gallery">
+                    <div class="gallery-instruction">
+                        <p>Déplacez votre souris ou touchez l'écran pour explorer les œuvres dans la pénombre...</p>
+                    </div>
+                    
+                    <!-- Les œuvres seront placées ici, principalement invisibles jusqu'à ce que la lampe les révèle -->
+                    <div class="artwork-wall">
+                        <div class="artwork" data-id="art1" style="top: 20%; left: 15%;">
+                            <img src="img/portrait.jpeg" alt="Concept Art">
+                            <div class="artwork-frame"></div>
+                        </div>
+                        
+                        <div class="artwork" data-id="art2" style="top: 30%; left: 45%;">
+                            <img src="img/digital.jpeg" alt="Illustration">
+                            <div class="artwork-frame"></div>
+                        </div>
+                        
+                        <div class="artwork" data-id="art3" style="top: 60%; left: 30%;">
+                            <img src="img/peinture.jpeg" alt="Croquis">
+                            <div class="artwork-frame"></div>
+                        </div>
+                        
+                        <div class="artwork" data-id="art4" style="top: 40%; left: 75%;">
+                            <img src="img/crochet.jpeg" alt="Character Design">
+                            <div class="artwork-frame"></div>
+                        </div>
+                        
+                        <div class="artwork" data-id="art5" style="top: 70%; left: 60%;">
+                            <img src="img/sculpture.jpeg" alt="Sculpture">
+                            <div class="artwork-frame"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ZONE : Borne d'arcade -->
+            <div class="zone arcade-machine-zone hidden" id="arcade-machine">
+                <div class="zone-header">
+                    <h2>Borne d'Arcade - Jeux</h2>
+                    <button class="back-btn" data-zone="arcade-hall"><i class="fas fa-arrow-left"></i> Retour</button>
+                </div>
+                
+                <div class="arcade-cabinet">
+                    <div class="cabinet-frame">
+                        <div class="cabinet-screen">
+                            <!-- Le contenu du jeu sélectionné apparaîtra ici -->
+                            <div class="game-selection active" id="game-menu">
+                                <h3 class="game-selection-title">SELECT GAME</h3>
+                                <div class="game-list">
+                                    <div class="game-item" data-id="game1">
+                                        <img src="img/firefly.png" alt="Adventure Quest">
+                                        <span>Firefly Dreams</span>
+                                    </div>
+                                    <div class="game-item" data-id="game2">
+                                        <img src="img/oiseau1.png" alt="jeu2">
+                                        <span>Vol d'oiseaux</span>
+                                    </div>
+                                    <div class="game-item" data-id="game3">
+                                        <img src="img/game3_thumb.jpg" alt="jeu3">
+                                        <span>Prochainement</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="cabinet-controls">
+                            <div class="joystick">
+                                <div class="joystick-base"></div>
+                                <div class="joystick-stick"></div>
+                            </div>
+                            <div class="buttons">
+                                <button class="arcade-btn red"></button>
+                                <button class="arcade-btn blue"></button>
+                                <button class="arcade-btn green"></button>
+                                <button class="arcade-btn yellow"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ZONE : Projecteur -->
+            <div class="zone projector-zone hidden" id="projector">
+                <div class="zone-header">
+                    <h2>Projecteur - Scènes Unreal</h2>
+                    <button class="back-btn" data-zone="arcade-hall"><i class="fas fa-arrow-left"></i> Retour</button>
+                </div>
+                
+                <div class="cinema-setup">
+                    <div class="projector-device">
+                        <div class="projector-body"></div>
+                        <div class="projector-lens"></div>
+                        <div class="projector-light"></div>
+                        <div class="film-reel left"></div>
+                        <div class="film-reel right"></div>
+                        <div class="projector-crank" id="projector-crank"></div>
+                    </div>
+                    
+                    <div class="cinema-screen">
+                        <div class="screen-content">
+                            <!-- Vidéo de la scène Unreal actuelle -->
+                            <video id="unreal-video" muted loop>
+                                <source src="video/chateau_video.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    
+                    <div class="film-selection">
+                        <div class="reel-container">
+                            <div class="reel" data-id="scene1">
+                                <div class="reel-film"></div>
+                                <span>Chateau</span>
+                            </div>
+                            <div class="reel" data-id="scene2">
+                                <div class="reel-film"></div>
+                                <span>Montagne</span>
+                            </div>
+                            <div class="reel" data-id="scene3">
+                                <div class="reel-film"></div>
+                                <span>Montagne v2</span>
+                            </div>
+                        </div>
+                        <p class="instruction">Tournez la manivelle pour changer de bobine !</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ZONE : Laboratoire GL4D -->
+            <div class="zone gl4d-lab-zone hidden" id="gl4d-lab">
+                <div class="zone-header">
+                    <h2>Laboratoire</h2>
+                    <button class="back-btn" data-zone="arcade-hall"><i class="fas fa-arrow-left"></i> Retour</button>
+                </div>
+                
+                <div class="lab-setup">
+                    <div class="lab-table">
+                        <div class="lab-display">
+                            <!-- La démo GL4D sera affichée ici -->
+                            <canvas id="gl4d-canvas"></canvas>
+                        </div>
+                        
+                        <div class="lab-equipment">
+                            <div class="equipment-row">
+                                <div class="lab-item flask" data-ingredient="particles">
+                                    <div class="flask-liquid green"></div>
+                                    <div class="flask-label">Particules</div>
+                                </div>
+                                
+                                <div class="lab-item flask" data-ingredient="colors">
+                                    <div class="flask-liquid blue"></div>
+                                    <div class="flask-label">Couleurs</div>
+                                </div>
+                                
+                                <div class="lab-item flask" data-ingredient="geometry">
+                                    <div class="flask-liquid red"></div>
+                                    <div class="flask-label">Géométrie</div>
+                                </div>
+                            </div>
+                            
+                            <div class="mixer-area">
+                                <div class="cauldron">
+                                    <div class="cauldron-liquid"></div>
+                                </div>
+                                <button class="mix-button">Mélanger</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lab-instructions">
+                        <h3>Mes Démos GL4D</h3>
+                        <ul>
+                            <li><span class="formula">Particules</span> = Animation de particules</li>
+                            <li><span class="formula">Couleurs</span> = Effets de couleurs dynamiques</li>
+                            <li><span class="formula">Géométrie</span> = Formes géométriques animées</li>
+                            <li><span class="formula">Particules + Couleurs</span> = Système de particules colorées</li>
+                            <li><span class="formula">Particules + Géométrie</span> = Animation procédurale</li>
+                            <li class="video-demo"><span class="formula">Couleurs + Géométrie</span> = Ma démo GL4D spéciale 1</li>
+                            <li class="video-demo"><span class="formula">Les trois ingrédients</span> = Ma démo GL4D complète</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Visionneuse de modèle 3D -->
+        <div class="model-viewer hidden" id="model-viewer">
+            <!-- Le contenu sera injecté par JavaScript -->
+        </div>
+        
+        <!-- Visualiseur d'œuvre d'art -->
+        <div class="artwork-viewer hidden" id="artwork-viewer">
+            <!-- Le contenu sera injecté par JavaScript -->
+        </div>
+        
+        <!-- Visualiseur de jeu -->
+        <div class="game-viewer hidden" id="game-viewer">
+            <!-- Le contenu sera injecté par JavaScript -->
+        </div>
+        
+        <!-- Infobulles et notifications -->
+        <div class="tooltip-container" id="tooltip-container"></div>
+        <div class="notification-container" id="notification-container"></div>
+        
+        <!-- Sons et musique -->
+        <audio id="background-music" src="audio/ambiance.mp3" loop></audio>
+        <audio id="click-sound" src="audio/click.mp3"></audio>
+        <audio id="success-sound" src="audio/success.mp3"></audio>
+        <audio id="transition-sound" src="audio/transition.mp3"></audio>
+    </div>
+    
+    <script src="script.js"></script>
+    <script src="easter-eggs.js"></script>
+    
+</body>
+</html>
