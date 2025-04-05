@@ -6,13 +6,6 @@ function initHiddenDialogues() {
   // Éléments interactifs cachés - avec des sélecteurs plus larges pour une meilleure couverture
   const hiddenElements = [
     { 
-      selector: '.neon-sign, .machine-preview img, .arcade-machines h3', 
-      quotes: [
-        "La créativité, c'est l'intelligence qui s'amuse !",
-        "Le code est poésie, un bug est juste une rime inattendue."
-      ]
-    },
-    { 
       selector: '.floating-particle, .cabinet-frame, .glow-effect', 
       quotes: [
         "J'ai passé beaucoup trop de temps à animer ces particules...",
