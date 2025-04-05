@@ -30,6 +30,7 @@ Ce portfolio est conçu comme une salle d'arcade virtuelle où chaque installati
 
 ### 🔍 Easter Eggs
 Plusieurs surprises cachées sont disséminées à travers l'interface pour les visiteurs curieux !
+
 Exemple clique 10 fois sur le tire Portfolio !
 
 ## 🛠Technologies Utilisées
