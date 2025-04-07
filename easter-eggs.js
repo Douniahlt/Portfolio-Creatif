@@ -9,12 +9,14 @@ function initHiddenDialogues() {
       selector: '.floating-particle, .cabinet-frame, .glow-effect', 
       quotes: [
         "J'ai passé beaucoup trop de temps à animer ces particules...",
+        "Les effets lumineux sont inspirés des néons rétro des années 80."
       ]
     },
     { 
       selector: '.projector-light, .projector-lens, .film-reel', 
       quotes: [
-        "Fun fact: ma première expérience avec l'animation était un flipbook à l'âge de 7 ans."
+        "Fun fact: ma première expérience avec l'animation était un flipbook à l'âge de 7 ans.",
+        "Saviez-vous que les premiers projecteurs de cinéma s'appelaient des Kinétoscopes?"
       ]
     },
     { 
@@ -26,73 +28,302 @@ function initHiddenDialogues() {
     }
   ];
 
+  // Easter eggs spécifiques pour chaque œuvre d'art
+  const artworkEasterEggs = {
+    'art1': { // Portrait au crayon
+      message: "Fun fact: Ce portrait a pris 10 heures de travail avec seulement 3 crayon !"
+    },
+    'art2': { // Illustration digitale
+      message: "Ce personnage apparaîtra dans un webcomic que je développe secrètement..."
+    },
+    'art3': { // Peinture classique
+      message: "La peinture action m'a donné du fil à retordre, mais le résultat en valait la peine !"
+    },
+    'art4': { // Bouquet en crochet
+      message: "Ce bouquet ne fanera jamais !"
+    },
+    'art5': { // Sculpture
+      message: "Le travail d'équipe fais des miracles !"
+    }
+  };
+  
+  // Easter eggs spécifiques pour les modèles 3D
+  const modelEasterEggs = {
+    'model1': { // Personnage 3D
+      message: "Ce personnage arrivera très prochainement dans un prochain projet !"
+    },
+    'model2': { // Lanterne
+      message: "Trouver comment faire du bloom avec le compositing render layer c'etait un vrai défi !"
+    },
+    'model3': { // Katana
+      message: "Le deuxième modèle que j'ai fais !"
+    },
+    'model4': { // Grenouille
+      message: "J'apprend blender donc quand j'ai vu que ma v1 faisais 6millions de polygones..."
+    },
+    'model5': { // Phare
+      message: "Peut être q'un petit marin est caché dans la fenêtre du phare qui sait ?"
+    }
+  };
+
   // Créer la bulle de dialogue (une seule, réutilisée)
   const dialogBubble = document.createElement('div');
   dialogBubble.className = 'easter-egg-dialogue';
   dialogBubble.style.display = 'none';
   document.body.appendChild(dialogBubble);
 
-  // Ajouter les interactions
+  // Fonction pour afficher un message dans la bulle
+  function showDialogue(message, element, event) {
+    // Positionner et afficher la bulle
+    const rect = element.getBoundingClientRect();
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    
+    // Ajuster la position pour qu'elle soit visible à l'écran
+    const bodyRect = document.body.getBoundingClientRect();
+    let topPos, leftPos;
+    
+    // Si un événement est fourni, utiliser sa position
+    if (event) {
+      topPos = event.pageY - 80;
+      leftPos = event.pageX - 125;
+    } else {
+      // Sinon, centrer sur l'élément
+      topPos = rect.top + scrollTop - 80;
+      leftPos = rect.left + rect.width/2 - 125;
+    }
+    
+    // S'assurer que la bulle reste dans les limites de l'écran
+    if (leftPos < 10) leftPos = 10;
+    if (leftPos > bodyRect.width - 260) leftPos = bodyRect.width - 260;
+    if (topPos < 70) topPos = 70;
+    
+    dialogBubble.textContent = message;
+    dialogBubble.style.top = `${topPos}px`;
+    dialogBubble.style.left = `${leftPos}px`;
+    dialogBubble.style.display = 'block';
+    dialogBubble.classList.add('show-dialogue');
+    
+    // Jouer un son
+    if (typeof playSound === 'function') {
+      playSound('click');
+    }
+    
+    // Masquer après délai - réduit de 4000ms à 3000ms
+    setTimeout(() => {
+      dialogBubble.classList.remove('show-dialogue');
+      setTimeout(() => {
+        dialogBubble.style.display = 'none';
+      }, 500);
+    }, 3000); // Réduit de 4000ms à 3000ms
+  }
+
+  // Ajouter les interactions pour les éléments génériques
   hiddenElements.forEach(element => {
     const targets = document.querySelectorAll(element.selector);
     
     targets.forEach(target => {
-      // S'assurer que l'élément est positionné (pour l'indicateur visuel)
+      // S'assurer que l'élément est positionné pour l'indicateur
       const currentPosition = window.getComputedStyle(target).position;
       if (currentPosition === 'static') {
         target.style.position = 'relative';
       }
       
-      // Ajouter indice visuel plus visible (classe + indicateur)
+      // Ajouter la classe d'easter egg
       target.classList.add('has-secret');
       
-      // Créer un indicateur visuel distinct pour chaque élément secret
+      // Créer l'indicateur visuel
       const indicator = document.createElement('span');
       indicator.className = 'secret-indicator';
       indicator.innerHTML = '?';
       target.appendChild(indicator);
       
-      // Ajouter gestionnaire de clic
-      target.addEventListener('click', (event) => {
+      // Ajouter gestionnaire de clic UNIQUEMENT sur l'indicateur
+      indicator.addEventListener('click', (event) => {
+        event.stopPropagation(); // Empêcher la propagation aux parents
+        
         // Empêcher les clics multiples pendant l'affichage
         if (dialogBubble.style.display === 'block') return;
         
         // Choisir une citation aléatoire
         const randomQuote = element.quotes[Math.floor(Math.random() * element.quotes.length)];
-        
-        // Positionner et afficher la bulle
-        dialogBubble.textContent = randomQuote;
-        
-        // Ajuster la position pour qu'elle soit visible à l'écran
-        const bodyRect = document.body.getBoundingClientRect();
-        let topPos = event.pageY - 80;
-        let leftPos = event.pageX - 125;
-        
-        // S'assurer que la bulle reste dans les limites de l'écran
-        if (leftPos < 10) leftPos = 10;
-        if (leftPos > bodyRect.width - 260) leftPos = bodyRect.width - 260;
-        if (topPos < 70) topPos = 70;
-        
-        dialogBubble.style.top = `${topPos}px`;
-        dialogBubble.style.left = `${leftPos}px`;
-        dialogBubble.style.display = 'block';
-        dialogBubble.classList.add('show-dialogue');
-        
-        // Jouer un son
-        if (typeof playSound === 'function') {
-          playSound('click');
-        }
-        
-        // Masquer après délai
-        setTimeout(() => {
-          dialogBubble.classList.remove('show-dialogue');
-          setTimeout(() => {
-            dialogBubble.style.display = 'none';
-          }, 500);
-        }, 4000);
+        showDialogue(randomQuote, target, event);
       });
     });
   });
+  
+  // Fonction pour appliquer les easter eggs aux éléments
+  function applyEasterEggToElement(element, message) {
+    if (!element) return;
+    
+    // S'assurer que l'élément est positionné
+    const currentPosition = window.getComputedStyle(element).position;
+    if (currentPosition === 'static') {
+      element.style.position = 'relative';
+    }
+    
+    // Ajouter la classe d'easter egg
+    element.classList.add('has-secret');
+    
+    // Supprimer un indicateur existant s'il y en a un
+    const existingIndicator = element.querySelector('.secret-indicator');
+    if (existingIndicator) {
+      existingIndicator.remove();
+    }
+    
+    // Créer l'indicateur
+    const indicator = document.createElement('span');
+    indicator.className = 'secret-indicator';
+    indicator.innerHTML = '?';
+    
+    // Ajustements spéciaux pour certains types d'éléments
+    if (element.classList.contains('model-capsule')) {
+      // Pour les modèles 3D, rendre l'indicateur TOUJOURS visible
+      indicator.style.opacity = '1';
+      indicator.style.zIndex = '1000';
+      indicator.style.width = '20px';
+      indicator.style.height = '20px';
+      indicator.style.top = '5px';
+      indicator.style.right = '5px';
+      indicator.style.fontSize = '14px';
+      indicator.style.backgroundColor = 'var(--arcade-accent)';
+      indicator.style.animation = 'pulse-glow 1.5s infinite';
+      indicator.style.boxShadow = '0 0 10px var(--arcade-accent-glow)';
+    }
+    
+    element.appendChild(indicator);
+    
+    // Ajouter gestionnaire de clic sur l'indicateur
+    indicator.addEventListener('click', (event) => {
+      event.stopPropagation(); // Empêcher la propagation aux parents
+      if (dialogBubble.style.display === 'block') return;
+      showDialogue(message, element, event);
+    });
+  }
+  
+  // Appliquer les easter eggs aux œuvres d'art
+  function applyArtworkEasterEggs() {
+    Object.keys(artworkEasterEggs).forEach(artId => {
+      const artwork = document.querySelector(`.artwork[data-id="${artId}"]`);
+      if (artwork) {
+        applyEasterEggToElement(artwork, artworkEasterEggs[artId].message);
+      }
+    });
+  }
+  
+  // Fonction spéciale pour appliquer les easter eggs aux modèles 3D
+  function applyModelEasterEggs() {
+    // Chercher d'abord le conteneur des capsules pour voir s'il est déjà chargé
+    const capsuleContainer = document.querySelector('.capsule-container');
+    
+    Object.keys(modelEasterEggs).forEach(modelId => {
+      const modelCapsule = document.querySelector(`.model-capsule[data-id="${modelId}"]`);
+      
+      if (modelCapsule) {
+        // Supprimer tout indicateur existant
+        const existingIndicators = modelCapsule.querySelectorAll('.secret-indicator, .model-secret-indicator');
+        existingIndicators.forEach(ind => ind.remove());
+        
+        // Créer un nouvel indicateur avec une position absolue
+        const indicator = document.createElement('div');
+        indicator.className = 'model-secret-indicator'; // Classe différente pour style spécifique
+        indicator.innerHTML = '?';
+        
+        // Appliquer les styles directement
+        indicator.style.position = 'absolute';
+        indicator.style.top = '5px';
+        indicator.style.right = '5px';
+        indicator.style.width = '20px';
+        indicator.style.height = '20px';
+        indicator.style.backgroundColor = 'var(--arcade-accent)';
+        indicator.style.color = 'white';
+        indicator.style.borderRadius = '50%';
+        indicator.style.display = 'flex';
+        indicator.style.justifyContent = 'center';
+        indicator.style.alignItems = 'center';
+        indicator.style.fontSize = '14px';
+        indicator.style.fontWeight = 'bold';
+        indicator.style.cursor = 'pointer';
+        indicator.style.zIndex = '1000';
+        indicator.style.opacity = '1';
+        indicator.style.animation = 'pulse-glow 1.5s infinite';
+        indicator.style.boxShadow = '0 0 10px var(--arcade-accent-glow)';
+        
+        // Ajouter au modèle
+        modelCapsule.appendChild(indicator);
+        
+        // Gestionnaire de clic pour l'indicateur
+        indicator.addEventListener('click', (event) => {
+          event.stopPropagation();
+          if (dialogBubble.style.display === 'block') return;
+          
+          // Assurons-nous que la position est correcte pour les modèles
+          showDialogue(modelEasterEggs[modelId].message, modelCapsule, event);
+        });
+      }
+    });
+  }
+  
+  // Appliquer initialement les easter eggs
+  applyArtworkEasterEggs();
+  
+  // Pour les modèles 3D, attendre que tout soit chargé
+  setTimeout(applyModelEasterEggs, 1000);
+  
+  // Vérification périodique pour les modèles 3D (s'ils n'ont pas été chargés immédiatement)
+  const checkInterval = setInterval(() => {
+    const models = document.querySelectorAll('.model-capsule');
+    if (models.length > 0) {
+      applyModelEasterEggs();
+    }
+  }, 2000);
+  
+  // Arrêter l'intervalle après un certain temps
+  setTimeout(() => {
+    clearInterval(checkInterval);
+  }, 10000); // 10 secondes max
+  
+  // Observer les changements dans le DOM pour les éléments ajoutés dynamiquement
+  const observer = new MutationObserver((mutations) => {
+    let shouldApplyArtworkEasterEggs = false;
+    let shouldApplyModelEasterEggs = false;
+    
+    mutations.forEach((mutation) => {
+      if (mutation.addedNodes.length) {
+        // Vérifier si des œuvres d'art ou des modèles ont été ajoutés
+        mutation.addedNodes.forEach((node) => {
+          if (node.nodeType === 1) { // Type d'élément
+            if (node.classList && (
+                node.classList.contains('artwork') || 
+                node.querySelector('.artwork')
+            )) {
+              shouldApplyArtworkEasterEggs = true;
+            }
+            
+            if (node.classList && (
+                node.classList.contains('model-capsule') || 
+                node.querySelector('.model-capsule') ||
+                node.classList.contains('capsule-container') ||
+                node.querySelector('.capsule-container')
+            )) {
+              shouldApplyModelEasterEggs = true;
+            }
+          }
+        });
+      }
+    });
+    
+    // Réappliquer les easter eggs si nécessaire
+    if (shouldApplyArtworkEasterEggs) {
+      applyArtworkEasterEggs();
+    }
+    
+    if (shouldApplyModelEasterEggs) {
+      setTimeout(applyModelEasterEggs, 500); // Délai pour s'assurer que tout est rendu
+    }
+  });
+  
+  // Observer le corps du document
+  observer.observe(document.body, { childList: true, subtree: true });
   
   // Ajouter des styles pour les secrets et la bulle
   const styles = document.createElement('style');
@@ -112,20 +343,26 @@ function initHiddenDialogues() {
       font-size: 10px;
       font-weight: bold;
       opacity: 0;
-      z-index: 10;
+      z-index: 50;
       transition: opacity 0.3s;
-      pointer-events: none;
-    }
-    
-    .has-secret {
       cursor: pointer;
     }
     
     .has-secret:hover .secret-indicator {
-      opacity: 0.7;
+      opacity: 0.9;
       animation: pulse-glow 1.5s infinite;
     }
     
+    /* Style spécifique pour les indicateurs des modèles 3D */
+    .model-secret-indicator {
+      opacity: 1 !important; /* Toujours visible */
+      position: absolute;
+      z-index: 1000;
+      animation: pulse-glow 1.5s infinite;
+      width: 15px !important;
+      height: 15px !important;
+      font-size: 10px !important;
+    }
     .easter-egg-dialogue {
       position: absolute;
       background-color: var(--panel-bg);
@@ -165,6 +402,17 @@ function initHiddenDialogues() {
       opacity: 1;
       transform: translateY(0);
     }
+    
+    @keyframes pulse-glow {
+      0%, 100% {
+        box-shadow: 0 0 5px var(--arcade-accent-glow);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 0 15px var(--arcade-accent-glow);
+        transform: scale(1.2);
+      }
+    }
   `;
   document.head.appendChild(styles);
   
@@ -178,7 +426,7 @@ function initHiddenDialogues() {
         <button class="close-notification">&times;</button>
       </div>
       <div class="notification-content">
-        <p>Ce portfolio contient des easter eggs ! Cherchez les éléments avec un "?" et cliquez pour les découvrir.</p>
+        <p>Ce portfolio contient des easter eggs ! Cherchez les éléments avec un "?" et cliquez dessus pour les découvrir.</p>
       </div>
     `;
     
@@ -501,7 +749,7 @@ function initTitleClickGame() {
             ctx.shadowBlur = 0;
           });
           
-          // Dessiner la nourriture
+          //// Dessiner la nourriture
           ctx.fillStyle = food.color;
           ctx.shadowBlur = 15;
           ctx.shadowColor = food.color;
