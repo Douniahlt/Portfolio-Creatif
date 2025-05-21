@@ -1026,11 +1026,11 @@ function initLab() {
     labDisplay.innerHTML = `
         <canvas id="gl4d-canvas"></canvas>
         <video id="demo-video-1" class="demo-video hidden" controls poster="demo1-poster.jpg">
-            <source src="video/feu.webm" type="video/mp4">
+            <source src="video/feu.mp4" type="video/mp4">
             Votre navigateur ne supporte pas les vidéos HTML5.
         </video>
         <video id="demo-video-2" class="demo-video hidden" controls poster="demo2-poster.jpg">
-            <source src="video/F1.webm" type="video/mp4">
+            <source src="video/64mo.mkv" type="video/mp4">
             Votre navigateur ne supporte pas les vidéos HTML5.
         </video>
     `;
