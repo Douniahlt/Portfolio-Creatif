@@ -1025,10 +1025,12 @@ function initLab() {
     // Remplacer le contenu du lab display pour avoir à la fois un canvas et des vidéos
     labDisplay.innerHTML = `
         <canvas id="gl4d-canvas"></canvas>
-        <video id="demo-video-1" class="demo-video hidden" controls poster="demo1-poster.jpg">
-            <source src="video/feu.mp4" type="video/mp4">
-            Votre navigateur ne supporte pas les vidéos HTML5.
-        </video>
+        <div id="demo-video-1" class="demo-video youtube-container hidden">
+            <iframe width="100%" height="100%" src="https://youtu.be/epXMVJcsTxc" 
+                    frameborder="0" allowfullscreen
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+            </iframe>
+        </div>
         <video id="demo-video-2" class="demo-video hidden" controls poster="demo2-poster.jpg">
             <source src="video/64mo.mkv" type="video/mp4">
             Votre navigateur ne supporte pas les vidéos HTML5.
