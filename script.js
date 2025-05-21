@@ -1025,12 +1025,15 @@ function initLab() {
     // Remplacer le contenu du lab display pour avoir à la fois un canvas et des vidéos
     labDisplay.innerHTML = `
         <canvas id="gl4d-canvas"></canvas>
-        <video id="demo-video-1" class="demo-video hidden" controls poster="demo1-poster.jpg">
-            <source src="video/feu.webm" type="video/mp4">
-            Votre navigateur ne supporte pas les vidéos HTML5.
-        </video>
+        <iframe id="demo-video-1" class="demo-video hidden" 
+            src="https://www.youtube.com/embed/epXMVJcsTxc?enablejsapi=1"
+            title="Démo GL4D - Feu" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
         <video id="demo-video-2" class="demo-video hidden" controls poster="demo2-poster.jpg">
-            <source src="video/F1.webm" type="video/mp4">
+            <source src="video/mo.webm" type="video/mp4">
             Votre navigateur ne supporte pas les vidéos HTML5.
         </video>
     `;
@@ -1158,7 +1161,14 @@ function initLab() {
             // Masquer tous les éléments d'abord
             canvas.style.display = 'none';
             document.querySelectorAll('.demo-video').forEach(video => {
-                video.pause();
+                if (video.tagName === 'VIDEO') {
+                    video.pause();
+                } else if (video.tagName === 'IFRAME') {
+                    // Pour les iframes YouTube, on change la src pour arrêter la lecture
+                    const currentSrc = video.src;
+                    video.src = '';
+                    setTimeout(() => { video.src = currentSrc; }, 10);
+                }
                 video.classList.add('hidden');
             });
             
@@ -1170,8 +1180,8 @@ function initLab() {
                 case 'colors-geometry': // Première démo vidéo personnalisée
                     demoVideo1.classList.remove('hidden');
                     demoVideo1.style.display = 'block';
-                    demoVideo1.currentTime = 0;
-                    demoVideo1.play().catch(e => console.log('Lecture automatique empêchée:', e));
+                    // Pour YouTube, on utilise une approche différente
+                    demoVideo1.src = "https://www.youtube.com/embed/epXMVJcsTxc?autoplay=1&enablejsapi=1";
                     break;
                     
                 case 'colors-geometry-particles': // Deuxième démo vidéo personnalisée
